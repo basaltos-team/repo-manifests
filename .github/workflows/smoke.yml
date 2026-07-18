@@ -1,0 +1,24 @@
+name: smoke
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  repo-shape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check expected repository manifest directories
+        run: |
+          set -eu
+          test -d channels/stable/x86_64
+          test -d channels/staging/x86_64
+          test -d manifests
+      - name: Check script syntax if scripts exist
+        run: |
+          set -eu
+          if [ -d scripts ]; then
+            find scripts -type f ! -name '.gitkeep' -exec sh -n {} +
+          fi
