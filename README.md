@@ -32,3 +32,13 @@ Operational publishing scripts and signing-adjacent runbooks belong in the priva
 - Consumes signed packages from `packages/`.
 - Emits repo metadata consumed by pacman, `iso/`, release tooling, and docs.
 - No hand edits to generated channel metadata.
+
+## Validation
+
+For now, keep validation to repository shape:
+
+```sh
+test -d channels/stable/x86_64
+test -d channels/staging/x86_64
+test -d manifests
+```
